@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: voting-app-redis
+  template:
+    metadata:
+      labels:
+        app: voting-app-redis
+        project: demo-voting-app
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 6379
